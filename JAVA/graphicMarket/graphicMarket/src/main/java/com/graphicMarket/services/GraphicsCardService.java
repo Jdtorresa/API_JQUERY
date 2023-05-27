@@ -15,6 +15,8 @@ public class GraphicsCardService {
         ListGraphicsCards.add(new GraphicsCard(4, "AMD", "Radeon RX 6900 XT", 16, 3));
         ListGraphicsCards.add(new GraphicsCard(5, "Nvidia", "GeForce RTX 3070", 8, 2));
         ListGraphicsCards.add(new GraphicsCard(6, "AMD", "Radeon RX 6700 XT", 12, 2));
+        ListGraphicsCards.add(new GraphicsCard(7, "INTEL", "ARC A770", 8, 2));
+        ListGraphicsCards.add(new GraphicsCard(8, "INTEL", "ARC 380", 4, 2));
     }
 
     public List<GraphicsCard> AllGraphicsCards(){

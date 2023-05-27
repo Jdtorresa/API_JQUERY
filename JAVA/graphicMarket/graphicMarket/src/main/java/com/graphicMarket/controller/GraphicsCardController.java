@@ -12,7 +12,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RestController
 public class GraphicsCardController {
-    HttpServletResponse response;
 
     private GraphicsCardService graphicsCardService;
 

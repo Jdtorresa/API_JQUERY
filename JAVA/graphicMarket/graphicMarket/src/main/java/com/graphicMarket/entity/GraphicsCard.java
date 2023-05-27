@@ -57,14 +57,4 @@ public class GraphicsCard {
         this.fanCount = fanCount;
     }
 
-    @Override
-    public String toString() {
-        return "GraphicsCard{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", vram=" + vram +
-                ", fanCount=" + fanCount +
-                '}';
-    }
 }
