@@ -25,7 +25,6 @@ $(document).ready(function() {
         $("#mensaje").html("");
       },
       success: function(response) {
-
           var mensaje = "Los datos ingresados son:<br>" +
             "ID: " + data.id + "<br>" +
             "Brand: " + data.brand + "<br>" +
@@ -38,9 +37,9 @@ $(document).ready(function() {
       },
       error: function(xhr, status, error) {
         if (xhr.status === 409) {
-          $("#error-message").text("El ID ya existe. Introduce un ID diferente.");
+          $("#error-message").text("The ID already exists. Enter a different ID.");
         } else {
-          var errorMessage = xhr.responseText || "Error interno del servidor";
+          var errorMessage = xhr.responseText || "Internal Server Error";
           $("#error-message").text(errorMessage);
         }
         console.log(status);
