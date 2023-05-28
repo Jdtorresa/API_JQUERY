@@ -48,13 +48,36 @@ $(document).ready(function() {
     });
   });
 
-  $("button").click(function() {
+  $("#enviarid").click(function() {
+    var IdAConsultar = $("#byid").val();
+    $.ajax({
+      url: "http://localhost:8080/graphics/"+IdAConsultar,
+      type: "GET",
+      dataType: "json",
+      success: function(datos) {
+        var pElement = $("#pid");
+        pElement.empty();
+        pElement.append(JSON.stringify(datos));
+      },
+      error: function(xhr, status, error) {
+        if (xhr.status === 404) {
+          $(".errorNotFound").text("The ID doesn't exists. 404 Not Found");
+        } else {
+          var errorMessage = xhr.responseText || "Internal Server Error";
+          $(".errorNotFound").text(errorMessage);
+        }
+        console.log(status);
+        console.log(error);
+      }
+    });
+  });
+
+  $("#button").click(function() {
     $.ajax({
       url: "http://localhost:8080/graphics/all",
       type: "GET",
       dataType: "json",
       success: function(datos) {
-        console.log(datos);
         var ulElement = $("#ul");
         ulElement.empty();
         $.each(datos, function(index, obj) {
