@@ -37,8 +37,13 @@ public class GraphicsCardService {
         ListGraphicsCards.add(graphicsCard);
     }
 
-    public void DeleteGraphicsCard(int id){
-            ListGraphicsCards.remove(id);
+    public void DeleteGraphicsCard(int id) {
+        for (GraphicsCard graphicsCard : ListGraphicsCards) {
+            if (graphicsCard.getId() == id) {
+                ListGraphicsCards.remove(graphicsCard);
+                break;
+            }
+        }
     }
 
     public void UpdateGraphicsCard(GraphicsCard graphicsCardUpdated){
@@ -51,6 +56,6 @@ public class GraphicsCardService {
                     return;
                 }
             }
-
     }
+
 }
