@@ -171,6 +171,7 @@ $(document).ready(function() {
    //Charge Info
    $('#formUpdate').submit(function(e) {
     e.preventDefault();
+    let mensajeUpdate= document.querySelector('#mensajeUpdate');
     let mensajeCharge= document.querySelector('#mensajeCharge');
     var idActualizar = $('#idUpdate').val();
     mensajeCharge.classList.remove('alert-danger')
@@ -181,7 +182,7 @@ $(document).ready(function() {
       $('#updateVram').val('');
       $('#updateFanCount').val('');
       mensajeCharge.classList.add('alert-danger')
-      mensajeCharge.classList.add('alert-sucess')
+      mensajeCharge.classList.add('alert-success')
       $('#mensajeCharge').text('Please enter an ID to make the update')
       return;
     }
@@ -190,7 +191,14 @@ $(document).ready(function() {
       type: "GET",
       dataType: "JSON",
       success: function(respuesta) {
+        mensajeUpdate.classList.remove('alert-success')
+        $('#mensajeUpdate').text('');
         $('#idUpdate').prop('disabled', true);
+        $('#updateBrand').prop('disabled', false);
+        $('#updateModel').prop('disabled', false);
+        $('#updateVram').prop('disabled', false);
+        $('#updateFanCount').prop('disabled', false);
+        $('#enviarupdate').prop('disabled', false);
         $('#updateBrand').val(respuesta.brand);
         $('#updateModel').val(respuesta.model);
         $('#updateVram').val(respuesta.vram);
@@ -248,6 +256,11 @@ $(document).ready(function() {
         mensajeCharge.classList.remove('alert-success');
         $('#idUpdate').val('')
         $('#mensajeCharge').text('');
+        $('#updateBrand').prop('disabled', true);
+        $('#updateModel').prop('disabled', true);
+        $('#updateVram').prop('disabled', true);
+        $('#updateFanCount').prop('disabled', true);
+        $('#enviarupdate').prop('disabled', true);
       },
       error: function(xhr, status, error) {
         console.log(status);
