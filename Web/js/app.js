@@ -53,7 +53,36 @@ $(document).ready(function() {
     });
   });
 
+  //ALL Graphics Cards
+  $('#list').on('click', function() {
+    let tabla = document.querySelector('#table')
+    tabla.innerHTML = ''
+    $.ajax({
+        url: "http://localhost:8080/graphics/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function(respuesta) {
+          var nuevaFila = document.createElement("tr");
+          nuevaFila.innerHTML += '<td>' + 'ID' +
+          '</td><td>' + 'Brand' +
+          '</td><td>' + 'Model' +
+          '</td><td>' + 'VRAM' +
+          '</td><td>' + 'fanCount' +
+          '</td>';
+          nuevaFila.classList.add("resaltado");
+          tabla.appendChild(nuevaFila);
+            for (i = 0; i < respuesta.length; i++) {
+                tabla.innerHTML += '<tr><td>' + respuesta[i].id +
+                    '</td><td>' + respuesta[i].brand +
+                    '</td><td>' + respuesta[i].model +
+                    '</td><td>' + respuesta[i].vram +
+                    '</td><td>' + respuesta[i].fanCount +
+                    '</td></tr>';
+            }
+        }
 
+    })
+});
   //Graphic Card By ID
   $("#enviarid").click(function(e) {
     e.preventDefault();
@@ -61,6 +90,7 @@ $(document).ready(function() {
     let tabla = document.querySelector('#tableid')
     let errorMensaje = document.querySelector('#errormes')
     if (IdAConsultar === '' ) {
+      tabla.innerHTML=''
       errorMensaje.classList.add('alert-danger');
       $("#errormes").text("Please enter an ID to make the query.");
       return;
@@ -70,6 +100,7 @@ $(document).ready(function() {
       type: "GET",
       dataType: "JSON",
       success: function(respuesta) {
+        $('#byid').val('');
         errorMensaje.innerHTML='';
         errorMensaje.classList.remove('alert-danger')
         tabla.innerHTML=''
@@ -105,38 +136,6 @@ $(document).ready(function() {
       }
     });
   });
-
-
-  //ALL Graphics Cards
-  $('#list').on('click', function() {
-    let tabla = document.querySelector('#table')
-    tabla.innerHTML = ''
-    $.ajax({
-        url: "http://localhost:8080/graphics/all",
-        type: "GET",
-        datatype: "JSON",
-        success: function(respuesta) {
-          var nuevaFila = document.createElement("tr");
-          nuevaFila.innerHTML += '<td>' + 'ID' +
-          '</td><td>' + 'Brand' +
-          '</td><td>' + 'Model' +
-          '</td><td>' + 'VRAM' +
-          '</td><td>' + 'fanCount' +
-          '</td>';
-          nuevaFila.classList.add("resaltado");
-          tabla.appendChild(nuevaFila);
-            for (i = 0; i < respuesta.length; i++) {
-                tabla.innerHTML += '<tr><td>' + respuesta[i].id +
-                    '</td><td>' + respuesta[i].brand +
-                    '</td><td>' + respuesta[i].model +
-                    '</td><td>' + respuesta[i].vram +
-                    '</td><td>' + respuesta[i].fanCount +
-                    '</td></tr>';
-            }
-        }
-
-    })
-});
 
   //Delete a graphic Card
   $('#deleteid').click(function(e){
